@@ -75,6 +75,7 @@ Class Router {
         if (is_callable(array($controller, $action)) == false) {
             die ('404 Not Found');
         }
+        
         // Выполняем действие
         $controller->$action();
     }
