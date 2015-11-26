@@ -1,26 +1,21 @@
-<p style="display: none;">
-    RewriteEngine on
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ index.php?route=$1 [L,QSA]
-</p>
+
 
 <?php
-include "../application/includes/startup.php";
-include '../application/Router.php';
+    include "../application/includes/startup.php";
+    include '../application/classes/router.php';
 
 
+    $router = new Router($registry);
 
-//$db = new PDO('mysql:host=localhost;dbname=auto', 'root', 'root');
-//
-//$registry->set ('db', $db);
-$router = new Router($registry);
+    $template = new Template($registry);
 
-$registry->set ('router', $router);
+    $registry->set ('template', $template);
 
-$router->setPath (site_path . 'controllers');
+    $registry->set ('router', $router);
 
-$router->delegate();
+    $router->setPath (site_path . 'controllers');
+
+    $router->delegate();
 
 
 

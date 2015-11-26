@@ -4,6 +4,11 @@ Class Router {
     private $path;
     private $args = array();
 
+    private $uri_list = array(
+        'login' => 'auth',
+        'register' => 'auth/register'
+    );
+
     function __construct($registry) {
         $this->registry = $registry;
     }
@@ -12,42 +17,36 @@ Class Router {
         $path = trim($path, '/\\');
         $path .= DIRSEP;
         if (is_dir($path) == false) {
-            //throw new Exception ('Invalid controllers path: `' . $path . '`');
+            #throw new Exception ('Invalid controllers path: `' . $path . '`');
         }
         $this->path = $path;
     }
 
     private function getController(&$file, &$controller, &$action, &$args) {
-        $route = (empty($_GET['route'])) ? '' : $_GET['route'];
-        if (empty($route)) { $route = 'index'; }
-
-        // Получаем раздельные части
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri = substr($uri, count($uri));
+        if(!empty($this->uri_list[$uri])){
+            $uri = $this->uri_list[$uri];
+        }
+        $route = $uri;
+        if (empty($route)) {$route = 'index'; }
         $route = trim($route, '/\\');
         $parts = explode('/', $route);
-
-        // Находим правильный контроллер
-        $cmd_path = $this->path;
+        $cmd_path = '/'.$this->path;
         foreach ($parts as $part) {
             $fullpath = $cmd_path . $part;
-            // Есть ли папка с таким путём?
             if (is_dir($fullpath)) {
-                var_dump("aaa");
-
                 $cmd_path .= $part . DIRSEP;
                 array_shift($parts);
                 continue;
             }
-            // Находим файл
             if (is_file($fullpath . '.php')) {
-                var_dump("CCC");
                 $controller = $part;
                 array_shift($parts);
                 break;
             }
-
         }
         if (empty($controller)) { $controller = 'index'; };
-        // Получаем действие
         $action = array_shift($parts);
         if (empty($action)) { $action = 'index'; }
         $file = $cmd_path . $controller . '.php';
@@ -55,29 +54,17 @@ Class Router {
     }
 
     function delegate() {
-        // Анализируем путь
         $this->getController($file, $controller, $action, $args);
-        // Файл доступен?
-
         $file = '/'.$file;
         if (is_readable('/'.$file) == false) {
             die ('404 Not Found');
         }
-        // Подключаем файл
         include ($file);
-
-        // Создаём экземпляр контроллера
-        $class = $controller;
-
+        $class = 'Controller_' . $controller;
         $controller = new $class($this->registry);
-        // Действие доступно?
-
         if (is_callable(array($controller, $action)) == false) {
             die ('404 Not Found');
         }
-
-        
-        // Выполняем действие
         $controller->$action();
     }
 }
