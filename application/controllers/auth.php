@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Controller_Auth extends Controller_Base {
 
     private $id;

@@ -4,7 +4,6 @@ include 'auth.php';
 include 'ajax_request.php';
 
 if (!empty($_COOKIE['sid'])) {
-    // check session id in cookies
     session_id($_COOKIE['sid']);
 }
 session_start();
@@ -20,7 +19,6 @@ class AuthorizationAjaxRequest extends AjaxRequest
     public function login()
     {
         if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-            // Method Not Allowed
             http_response_code(405);
             header("Allow: POST");
             $this->setFieldError("main", "Method Not Allowed");

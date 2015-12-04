@@ -6,44 +6,43 @@ if (!empty($_COOKIE['sid'])) {
 }
 session_start();
 require_once '../application/controllers/auth.php';
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>PHP Ajax Registration</title>
+    <title>Регестрация</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
-
     <div class="container">
-
       <?php if (Controller_Auth::isAuthorized()): ?>
-
-      <h1>Your are already registered!</h1>
-
+      <h1>Добро пожаловать, вы уже зарегистрированы!</h1>
       <form class="ajax" method="post" action="ajax">
           <input type="hidden" name="act" value="logout">
           <div class="form-actions">
-              <button class="btn btn-large btn-primary" type="submit">Logout</button>
+              <button class="btn btn-large btn-primary" type="submit">Выйти</button>
           </div>
       </form>
 
       <?php else: ?>
       <form class="form-signin ajax" method="post" action="ajax">
         <div class="main-error alert alert-error hide"></div>
-
-        <h2 class="form-signin-heading">Please sign up</h2>
-        <input name="username" type="text" class="input-block-level" placeholder="Username" autofocus>
-        <input name="password1" type="password" class="input-block-level" placeholder="Password">
-        <input name="password2" type="password" class="input-block-level" placeholder="Confirm password">
-        <input type="hidden" name="act" value="register">
-        <button class="btn btn-large btn-primary" type="submit">Register</button>
-        <div class="alert alert-info" style="margin-top:15px;">
-            <p>Already have account? <a href="/login">Sign In.</a>
+        <div class="form-center">
+            <h3 class="form-signin-heading">Пожалуйста, зарегестрируйтесь!</h3>
+            <input name="username" type="text" class="input-block-level" placeholder="Логин" autofocus>
+            <input name="password1" type="password" class="input-block-level" placeholder="Пароль">
+            <input name="password2" type="password" class="input-block-level" placeholder="Повторите пароль">
+            <input type="hidden" name="act" value="register">
+            <div>
+                <button class="btn btn-large btn-primary" type="submit">Зарегестрироваться</button>
+            </div>
+            <div class="alert alert-info" style="margin-top:15px;">
+                <p>Вы уже зарегестрированы? <a href="/login">Войти</a>
+            </div>
         </div>
       </form>
 

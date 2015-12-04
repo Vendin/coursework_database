@@ -6,12 +6,13 @@
 
 
     $router = new Router($registry);
+    $registry->set ('router', $router);
 
     $template = new Template($registry);
-
     $registry->set ('template', $template);
 
-    $registry->set ('router', $router);
+    $db = new PDO('mysql:host=localhost;dbname=autodb', 'root', 'root');
+    $registry->set ('db', $db);
 
     $router->setPath (site_path . 'controllers');
 
