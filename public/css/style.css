@@ -1,8 +1,4 @@
-@import url(reset.css);
-
 body {
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-color: #f0f0f0;
     font-family: Arial;
 }
@@ -14,6 +10,18 @@ body {
 
 input {
   margin: 10px;
+}
+
+.header-home {
+  padding: 0 20%;
+  background-color: #fff;
+}
+
+.container-body {
+  margin: 2% 20%;
+  background-color: #ffffff;
+  height: 450px;
+  border-radius: 20px;
 }
 
 .form-signin {

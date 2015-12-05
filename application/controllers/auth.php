@@ -29,12 +29,10 @@ class Controller_Auth extends Controller_Base {
 
 
     function index(){
-        $i = 111122222;
         include "../application/view/login.php";
     }
 
     function register(){
-        $i = 111122222;
         include "../application/view/register.php";
     }
 
@@ -84,6 +82,7 @@ class Controller_Auth extends Controller_Base {
         $salt = $this->getSalt($username);
 
         if (!$salt) {
+            header("Location: /login");
             return false;
         }
 
@@ -101,7 +100,13 @@ class Controller_Auth extends Controller_Base {
         } else {
             $this->is_authorized = true;
             $this->user_id = $this->user['id'];
+            $this->username = $this->user['username'];
             $this->saveSession($remember);
+        }
+        if ($this->is_authorized){
+            header("Location: /");
+        } else {
+            header("Location: /login");
         }
 
         return $this->is_authorized;
@@ -117,7 +122,7 @@ class Controller_Auth extends Controller_Base {
     public function saveSession($remember = false, $http_only = true, $days = 7)
     {
         $_SESSION["user_id"] = $this->user_id;
-
+        $_SESSION["login"] = $this->username;
         if ($remember) {
             // Save session id in cookies
             $sid = session_id();
@@ -165,6 +170,11 @@ class Controller_Auth extends Controller_Base {
             die();
         }
 
+        if ($this->is_authorized){
+            header("Location: /");
+        } else {
+            header("Location: /login");
+        }
         return $result;
     }
 

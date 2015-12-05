@@ -6,12 +6,16 @@ if (!empty($_COOKIE['sid'])) {
 }
 session_start();
 
-class Controller_Home extends Controller_Base {
+class Controller_Client extends Controller_Base {
 
 
-    function index()
-    {
-        include "../application/view/indexs.php";
+
+    function index(){
+        include "../application/view/client.php";
+    }
+
+    function add(){
+        var_dump($_POST);
     }
 
     function view() {

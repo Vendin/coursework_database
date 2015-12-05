@@ -18,7 +18,7 @@ require_once '../application/controllers/auth.php';
   </head>
 
   <body>
-    <div class="container">
+    <div style=" padding-top: 40px; padding-bottom: 40px;" class="container">
       <?php if (Controller_Auth::isAuthorized()): ?>
       <h1>Добро пожаловать, вы уже зарегистрированы!</h1>
       <form class="ajax" method="post" action="ajax">
