@@ -37,8 +37,6 @@ class Controller_Auth extends Controller_Base {
     }
 
 
-
-
     public static function isAuthorized()
     {
         if (!empty($_SESSION["user_id"])) {
@@ -116,6 +114,7 @@ class Controller_Auth extends Controller_Base {
     {
         if (!empty($_SESSION["user_id"])) {
             unset($_SESSION["user_id"]);
+            header("Location: /");
         }
     }
 

@@ -20,7 +20,7 @@ require_once '../application/controllers/auth.php';
 <nav style="margin-bottom: 0" class="header-home navbar navbar-default" role="navigation">
     <div style="background-color: #ffffff" class="container-fluid">
         <div  class="navbar-header">
-            <a class="navbar-brand" href="/home">Система оценки автомобилей</a>
+            <a class="navbar-brand" href="/">Система оценки автомобилей</a>
         </div>
         <?php if (Controller_Auth::isAuthorized()): ?>
         <div class="navbar-header navbar-right">
