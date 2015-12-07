@@ -33,9 +33,15 @@ require_once '../application/controllers/auth.php';
         <div class="main-error alert alert-error hide"></div>
         <div class="form-center">
             <h3 class="form-signin-heading">Пожалуйста, зарегестрируйтесь!</h3>
-            <input name="username" type="text" class="input-block-level" placeholder="Логин" autofocus>
-            <input name="password1" type="password" class="input-block-level" placeholder="Пароль">
-            <input name="password2" type="password" class="input-block-level" placeholder="Повторите пароль">
+            <input name="username" type="text" class="form-control" placeholder="Логин" autofocus>
+            <input name="password1" type="password" class="form-control" placeholder="Пароль">
+            <input name="password2" type="password" class="form-control" placeholder="Повторите пароль">
+            <select style="margin: 10px;" class="form-control" name="group">
+                <option disabled selected>Выберите группу пользователя</option>
+                <option value="1">Оценщик</option>
+                <option value="2">Администратор</option>
+                <option value="3">Менеджер</option>
+            </select>
             <input type="hidden" name="act" value="register">
             <div>
                 <button class="btn btn-large btn-primary" type="submit">Зарегестрироваться</button>

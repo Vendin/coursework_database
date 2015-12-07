@@ -8,6 +8,8 @@ class Controller_Auth extends Controller_Base {
     private $username;
     private $db;
     private $user_id;
+    private $group_user;
+
 
     private $db_host = "localhost";
     private $db_name = "autodb";
@@ -74,7 +76,7 @@ class Controller_Auth extends Controller_Base {
 
     public function authorize($username, $password, $remember=false)
     {
-        $query = "select id, username from users where
+        $query = "select id, username, group_user from users where
             username = :username and password = :password limit 1";
         $sth = $this->db->prepare($query);
         $salt = $this->getSalt($username);
@@ -92,13 +94,13 @@ class Controller_Auth extends Controller_Base {
             )
         );
         $this->user = $sth->fetch();
-
         if (!$this->user) {
             $this->is_authorized = false;
         } else {
             $this->is_authorized = true;
             $this->user_id = $this->user['id'];
             $this->username = $this->user['username'];
+            $this->group_user = $this->user['group_user'];
             $this->saveSession($remember);
         }
         if ($this->is_authorized){
@@ -114,6 +116,8 @@ class Controller_Auth extends Controller_Base {
     {
         if (!empty($_SESSION["user_id"])) {
             unset($_SESSION["user_id"]);
+            unset($_SESSION["login"]);
+            unset($_SESSION["group"]);
             header("Location: /");
         }
     }
@@ -122,6 +126,7 @@ class Controller_Auth extends Controller_Base {
     {
         $_SESSION["user_id"] = $this->user_id;
         $_SESSION["login"] = $this->username;
+        $_SESSION["group"] = $this->group_user;
         if ($remember) {
             // Save session id in cookies
             $sid = session_id();
@@ -135,15 +140,15 @@ class Controller_Auth extends Controller_Base {
         }
     }
 
-    public function create($username, $password) {
+    public function create($username, $password, $group) {
         $user_exists = $this->getSalt($username);
 
         if ($user_exists) {
             throw new \Exception("User exists: " . $username, 1);
         }
 
-        $query = "insert into users (username, password, salt)
-            values (:username, :password, :salt)";
+        $query = "insert into users (username, password, salt, group_user)
+            values (:username, :password, :salt, :group_user)";
         $hashes = $this->passwordHash($password);
         $sth = $this->db->prepare($query);
 
@@ -154,6 +159,7 @@ class Controller_Auth extends Controller_Base {
                     ':username' => $username,
                     ':password' => $hashes['hash'],
                     ':salt' => $hashes['salt'],
+                    ':group_user' => $group
                 )
             );
             $this->db->commit();

@@ -16,7 +16,6 @@ require_once '../application/controllers/auth.php';
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
 <nav style="margin-bottom: 0" class="header-home navbar navbar-default" role="navigation">
     <div style="background-color: #ffffff" class="container-fluid">
         <div  class="navbar-header">
@@ -25,15 +24,15 @@ require_once '../application/controllers/auth.php';
         <?php if (Controller_Auth::isAuthorized()): ?>
         <div class="navbar-header navbar-right">
             <a href="/register" type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['login']?></a>
+            <?php if($_SESSION['group'] == 2): ?>
+                <a href="/register" type="button" class="btn btn-default navbar-btn">Зарегестрировать пользователей</a>
+            <?php endif; ?>
         </div>
                 <span  class="navbar-left"></span>
-
-
             </div>
         <?php else: ?>
             <div class="navbar-header navbar-right">
                 <a href="/login" type="button" class="btn btn-default navbar-btn">Войти</a>
-                <a href="/register" type="button" class="btn btn-default navbar-btn">Зарегестрироваться</a>
             </div>
         <?php endif; ?>
     </div>
@@ -42,7 +41,9 @@ require_once '../application/controllers/auth.php';
 <div class="container-body row">
     <div class="col-md-4">
         <ul style="text-align: center; margin-top: 120px;" class="list-group">
-            <li style="width: 200px;" class="list-group-item"><a href="/client">Оценить машину</a></li>
+            <?php if($_SESSION['group'] == 1): ?>
+                <li style="width: 200px;" class="list-group-item"><a href="/client">Оценить машину</a></li>
+            <?php endif; ?>
             <li style="width: 200px;" class="list-group-item">Посмотреть отчет</li>
             <li style="width: 200px;" class="list-group-item">Создать отчет</li>
             <li style="width: 200px;" class="list-group-item">Изображения</li>

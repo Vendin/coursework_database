@@ -87,6 +87,7 @@ class AuthorizationAjaxRequest extends AjaxRequest
         $username = $this->getRequestParam("username");
         $password1 = $this->getRequestParam("password1");
         $password2 = $this->getRequestParam("password2");
+        $group = $this->getRequestParam("group");
 
         if (empty($username)) {
             $this->setFieldError("username", "Enter the username");
@@ -111,7 +112,7 @@ class AuthorizationAjaxRequest extends AjaxRequest
         $user = new Controller_Auth();
 
         try {
-            $new_user_id = $user->create($username, $password1);
+            $new_user_id = $user->create($username, $password1, $group);
         } catch (\Exception $e) {
             $this->setFieldError("username", $e->getMessage());
             return;

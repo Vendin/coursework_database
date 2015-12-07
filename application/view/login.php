@@ -34,8 +34,8 @@ require_once '../application/controllers/auth.php';
             <div  class="main-error alert alert-error hide"></div>
                 <div class="form-center">
                     <h3 class="form-signin-heading">Пожалуйста, авторизуйтесь!</h3>
-                    <input name="username" type="text" class="input-block-level" placeholder="Логин" autofocus>
-                    <input name="password" type="password" class="input-block-level" placeholder="Пароль">
+                    <input name="username" type="text" class="form-control" placeholder="Логин" autofocus>
+                    <input name="password" type="password" class="form-control" placeholder="Пароль">
                     <label class="checkbox">
                         <input name="remember-me" type="checkbox" value="remember-me" checked>Запомнить меня
                     </label>
@@ -44,7 +44,7 @@ require_once '../application/controllers/auth.php';
                         <button class="btn btn-large btn-primary" type="submit">Войти</button>
                     </div>
                     <div class="alert alert-info" style="margin-top:15px;">
-                        <p>У вас нет акаунта? <a href="/register">Зарегестрируйтесь</a>
+                        <p>У вас нет акаунта? Обратитесь к администратору.</p>
                     </div>
                 </div>
         </form>
