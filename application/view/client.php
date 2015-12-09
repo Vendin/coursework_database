@@ -20,7 +20,7 @@ require_once '../application/controllers/auth.php';
 <nav style="margin-bottom: 0" class="header-home navbar navbar-default" role="navigation">
     <div style="background-color: #ffffff" class="container-fluid">
         <div  class="navbar-header">
-            <a class="navbar-brand" href="/">Система оценки автомобилей</a>
+            <a class="navbar-brand" href="/home">Система оценки автомобилей</a>
         </div>
         <?php if (Controller_Auth::isAuthorized()): ?>
         <div class="navbar-header navbar-right">
@@ -44,7 +44,7 @@ require_once '../application/controllers/auth.php';
         <form class="form-center">
             <div style="display: none" id="pri">
                 <h3 style="width 500px; color: #777;  margin-top: 200px">Приблизительная стоимость автомобиля <span style=" color: blue; width: 30px" id="p"></span> руб</h3>
-                <a href="/" class="btn-cen btn btn-default">Перейти на главную</a>
+                <a href="/home" class="btn-cen btn btn-default">Перейти на главную</a>
             </div>
             <div id="client">
                 <h3>Заполните форму клиента.</h3>

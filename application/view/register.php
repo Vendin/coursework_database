@@ -19,7 +19,7 @@ require_once '../application/controllers/auth.php';
 
   <body>
     <div style=" padding-top: 40px; padding-bottom: 40px;" class="container">
-      <?php if (Controller_Auth::isAuthorized()): ?>
+      <?php if (Controller_Auth::isAuthorized() and $_SESSION['group'] != 2 ): ?>
       <h1>Добро пожаловать, вы уже зарегистрированы!</h1>
       <form class="ajax" method="post" action="ajax">
           <input type="hidden" name="act" value="logout">
@@ -41,6 +41,7 @@ require_once '../application/controllers/auth.php';
                 <option value="1">Оценщик</option>
                 <option value="2">Администратор</option>
                 <option value="3">Менеджер</option>
+                <option value="4">Аналитик</option>
             </select>
             <input type="hidden" name="act" value="register">
             <div>
