@@ -104,7 +104,7 @@ class Controller_Auth extends Controller_Base {
             $this->saveSession($remember);
         }
         if ($this->is_authorized){
-            header("Location: /home");
+            header("Location: /");
         } else {
             header("Location: /login");
         }
@@ -176,7 +176,7 @@ class Controller_Auth extends Controller_Base {
         }
 
         if ($this->is_authorized){
-            header("Location: /home");
+            header("Location: /");
         } else {
             header("Location: /login");
         }

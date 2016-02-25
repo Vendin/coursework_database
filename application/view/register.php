@@ -48,7 +48,7 @@ require_once '../application/controllers/auth.php';
                 <button class="btn btn-large btn-primary" type="submit">Зарегестрироваться</button>
             </div>
             <div class="alert alert-info" style="margin-top:15px;">
-                <p>Вы уже зарегестрированы? <a href="/login">Войти</a>
+                <p>Вы уже зарегестрированы? <a href="/login">Войдите.</a>
             </div>
         </div>
       </form>

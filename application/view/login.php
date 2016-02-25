@@ -19,7 +19,7 @@ require_once '../application/controllers/auth.php';
 
 <body>
 
-<div class="container">
+<div style="padding-top: 40px; padding-bottom: 40px;" class="container">
 
     <?php if (Controller_Auth::isAuthorized()): ?>
         <h1>Добро пожаловать, вы авторизованы!</h1>
@@ -44,7 +44,7 @@ require_once '../application/controllers/auth.php';
                         <button class="btn btn-large btn-primary" type="submit">Войти</button>
                     </div>
                     <div class="alert alert-info" style="margin-top:15px;">
-                        <p>У вас нет акаунта? Обратитесь к администратору.</p>
+                        <p>У вас нет акаунта? <a href="register">Создайте</a>.</p>
                     </div>
                 </div>
         </form>
